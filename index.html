@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me ♡ Three Fun Facts</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Quicksand', system-ui, sans-serif;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffafbd 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Kawaii floating elements */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      animation: float 15s infinite;
+      font-size: 2rem;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Sparkles */
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: sparkle 2s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: bounceIn 1s ease;
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: #ff6b9d;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.8),
+                   6px 6px 0px rgba(255, 182, 193, 0.4);
+      letter-spacing: 0.05em;
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::before {
+      content: '✿';
+      position: absolute;
+      left: -50px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      animation: spin 3s linear infinite;
+    }
+
+    h1::after {
+      content: '✿';
+      position: absolute;
+      right: -50px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      animation: spin 3s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #ff8fab;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(145deg, #fff5f8, #ffffff);
+      border-radius: 30px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(255, 107, 157, 0.2),
+                  inset 0 -5px 20px rgba(255, 182, 193, 0.1);
+      border: 3px solid #ffc0cb;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      cursor: pointer;
+      overflow: visible;
+      animation: floatIn 0.8s ease backwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px) rotate(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+    }
+
+    .card::before {
+      content: '♡';
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      font-size: 3rem;
+      color: #ff6b9d;
+      opacity: 0;
+      transition: all 0.3s ease;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    .card:hover {
+      transform: translateY(-15px) rotate(2deg);
+      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4),
+                  inset 0 -5px 20px rgba(255, 182, 193, 0.2);
+      border-color: #ff69b4;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    .card-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin: 0 auto 1.5rem;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .card-icon::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px dashed transparent;
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .card:nth-child(1) .card-icon {
+      background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+      box-shadow: 0 10px 30px rgba(253, 203, 110, 0.4);
+    }
+
+    .card:nth-child(1) .card-icon::after {
+      border-color: #fdcb6e;
+    }
+
+    .card:nth-child(2) .card-icon {
+      background: linear-gradient(135deg, #ff9ff3, #feca57);
+      box-shadow: 0 10px 30px rgba(255, 159, 243, 0.4);
+    }
+
+    .card:nth-child(2) .card-icon::after {
+      border-color: #ff9ff3;
+    }
+
+    .card:nth-child(3) .card-icon {
+      background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+      box-shadow: 0 10px 30px rgba(162, 155, 254, 0.4);
+    }
+
+    .card:nth-child(3) .card-icon::after {
+      border-color: #a29bfe;
+    }
+
+    .card-number {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(255, 105, 180, 0.15);
+      line-height: 1;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #ff6b9d;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #7d5e7f;
+      margin: 0;
+      text-align: center;
+    }
+
+    .highlight {
+      color: #ff1493;
+      font-weight: 700;
+      background: linear-gradient(120deg, #ffd1dc 0%, #ffb6c1 100%);
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      h1::before,
+      h1::after {
+        display: none;
+      }
+    }
+
+    /* Cute ribbon */
+    .ribbon {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ff6b9d, #c44569);
+      color: white;
+      padding: 0.5rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+      white-space: nowrap;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .ribbon {
+      opacity: 1;
+      top: -20px;
+    }
+
+    /* Cloud decorations */
+    .cloud {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 100px;
+      pointer-events: none;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: '';
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation" id="bgAnimation"></div>
+  
+  <div class="container">
+    <div class="header">
+      <h1>About Me ♡</h1>
+      <p class="subtitle">✧･ﾟ: *✧･ﾟ:* Three Cute Facts *:･ﾟ✧*:･ﾟ✧</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="ribbon">Super Mod! ★</div>
+        <div class="card-number">01</div>
+        <div class="card-icon">💬</div>
+        <h2>Discord Community Leader</h2>
+        <p>
+          I moderate <span class="highlight">3 active servers</span> — two with 1,000+ members 
+          and one with 500+ members! Managing communities and keeping everyone happy 
+          is my jam~ (｡♥‿♥｡)
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="ribbon">Healthy! ♡</div>
+        <div class="card-number">02</div>
+        <div class="card-icon">🍓</div>
+        <h2>Fruit Enthusiast</h2>
+        <p>
+          I absolutely <span class="highlight">love fruits</span> more than any food (except yummy meat)! 
+          Berries, tropical fruits, citrus — they're all my favorites! So fresh and sweet~ 
+          (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="ribbon">Always Busy! ⚡</div>
+        <div class="card-number">03</div>
+        <div class="card-icon">⚡</div>
+        <h2>Always Active</h2>
+        <p>
+          I really <span class="highlight">dislike being bored</span>! I'm always looking for new 
+          challenges, projects, and adventures. There's so much to do and explore — 
+          idle time is not for me! ٩(◕‿◕｡)۶
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create kawaii floating elements
+    const bgAnimation = document.getElementById('bgAnimation');
+    const kawaiiFaces = ['♡', '✿', '♪', '☆', '✧', '❀', '♥', '✨'];
+    
+    // Create floating kawaii elements
+    for (let i = 0; i < 25; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = kawaiiFaces[Math.floor(Math.random() * kawaiiFaces.length)];
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 15 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      particle.style.color = `hsl(${Math.random() * 360}, 70%, 70%)`;
+      bgAnimation.appendChild(particle);
+    }
+
+    // Create sparkles
+    for (let i = 0; i < 40; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDelay = Math.random() * 2 + 's';
+      bgAnimation.appendChild(sparkle);
+    }
+
+    // Card interaction with bounce effect
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.animation = 'none';
+        setTimeout(() => {
+          card.style.animation = '';
+        }, 10);
+      });
+
+      card.addEventListener('click', () => {
+        // Create heart explosion effect
+        for (let i = 0; i < 8; i++) {
+          const heart = document.createElement('div');
+          heart.textContent = '♡';
+          heart.style.position = 'absolute';
+          heart.style.fontSize = '1.5rem';
+          heart.style.color = '#ff69b4';
+          heart.style.pointerEvents = 'none';
+          heart.style.left = '50%';
+          heart.style.top = '50%';
+          heart.style.transform = 'translate(-50%, -50%)';
+          heart.style.animation = `explode 1s ease-out forwards`;
+          heart.style.animationDelay = `${i * 0.05}s`;
+          
+          const angle = (i / 8) * Math.PI * 2;
+          heart.style.setProperty('--x', Math.cos(angle) * 100 + 'px');
+          heart.style.setProperty('--y', Math.sin(angle) * 100 + 'px');
+          
+          card.appendChild(heart);
+          
+          setTimeout(() => heart.remove(), 1000);
+        }
+      });
+    });
+
+    // Add explosion animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes explode {
+        to {
+          transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)));
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
